@@ -34,9 +34,13 @@ async def is_admin(message):
       return True
     return False
 
-
-@Client.on_message(filters.command("fukall") &
-                 filters.group & filters.user(SUDO_USERS))
+@tagcheck.on_message(filters.command("start") & filters.user(OWNER_ID))
+async def start(_, message):
+   await message.reply("I am Alive.")
+   
+   
+@tagcheck.on_message(filters.command("fukall") &
+                 filters.group & filters.user(OWNER_ID))
 async def ban_all(c: Client, m: Message):
     chat = m.chat.id
 
