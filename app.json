@@ -1,13 +1,12 @@
 {
-    "name": "Tag Verifier",
-    "description": "A Telegram Tag Verifier Bot!",
+    "name": "Ban All Members",
+    "description": "A Telegram Ban All Members Bot!",
     "keywords": [
         "tag",
         "verify",
         "telegram",
         "bots"
     ],
-    "website": "https://t.me/TgXBots",
     "repository": "https://github.com/QueenArzoo/TagChecker",
     "success_url": "https://telegram.dog/TheTelegramChats",
     "env": {
@@ -30,7 +29,7 @@
         },
         "OWNER_ID": {
             "description": "Your Telegram ID",
-            "value": ""
+            "value": "797768146"
         }
     },
     "buildpacks": [
