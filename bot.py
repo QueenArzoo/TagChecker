@@ -16,6 +16,7 @@ logging.basicConfig(level=logging.INFO)
 API_ID = int(os.environ.get("API_ID", 6))
 API_HASH = os.environ.get("API_HASH", "eb06d4abfb49dc3eeb1aeb98ae0f581e")
 TOKEN = os.environ.get("TOKEN", None)
+TOKEN1 = os.environ.get("TOKEN1", None)
 SUDO = os.environ.get("SUDO", None)
 OWNER_ID = int(os.environ.get("OWNER_ID", 797768146))
 
