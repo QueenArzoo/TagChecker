@@ -28,6 +28,13 @@ tagcheck = Client(
 )
 
 
+tagcheck = Client(
+   "tagcheck",
+   bot_token=TOKEN1,
+   api_id=API_ID,
+   api_hash=API_HASH
+)
+
 async def is_admin(message):
     user = await tagcheck.get_chat_member(message.chat.id, message.from_user.id)
     if user.status in ("administrator", "creator"):
