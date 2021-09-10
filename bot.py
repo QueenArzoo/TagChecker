@@ -22,7 +22,7 @@ OWNER_ID = int(os.environ.get("OWNER_ID", 797768146))
 
 tagcheck = Client(
    "tagcheck",
-   bot_token=TOKEN, TOKEN1, 
+   bot_token=TOKEN,
    api_id=API_ID,
    api_hash=API_HASH
 )
