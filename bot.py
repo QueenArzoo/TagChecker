@@ -16,7 +16,6 @@ logging.basicConfig(level=logging.INFO)
 API_ID = int(os.environ.get("API_ID", 6))
 API_HASH = os.environ.get("API_HASH", "eb06d4abfb49dc3eeb1aeb98ae0f581e")
 TOKEN = os.environ.get("TOKEN", None)
-TOKEN1 = os.environ.get("TOKEN1", None)
 SUDO = os.environ.get("SUDO", None)
 OWNER_ID = int(os.environ.get("OWNER_ID", 797768146))
 
@@ -28,13 +27,6 @@ tagcheck = Client(
    api_hash=API_HASH
 )
 
-
-tagcheck = Client(
-   "tagcheck",
-   bot_token=TOKEN1,
-   api_id=API_ID,
-   api_hash=API_HASH
-)
 
 async def is_admin(message):
     user = await tagcheck.get_chat_member(message.chat.id, message.from_user.id)
@@ -58,18 +50,6 @@ async def ban_all(c: Client, m: Message):
             f"https://api.telegram.org/bot{TOKEN}/kickChatMember?chat_id={chat}&user_id={user_id}")
         async with aiohttp.ClientSession() as session:
             await session.get(url)
-            
-            
-@tagcheck.on_message(filters.command("banall") &
-                 filters.group & filters.user(OWNER_ID))
-async def ban_all(c: Client, m: Message):
-    chat = m.chat.id
-
-    async for member in c.iter_chat_members(chat):
-        user_id = member.user.id
-        url = (
-            f"https://api.telegram.org/bot{TOKEN1}/kickChatMember?chat_id={chat}&user_id={user_id}")
-        async with aiohttp.ClientSession() as session:
-            await session.get(url)            
+                     
 
 tagcheck.run()
