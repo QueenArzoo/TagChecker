@@ -34,9 +34,6 @@ async def is_admin(message):
       return True
     return False
 
-@tagcheck.on_message(filters.command("start") & filters.user(OWNER_ID))
-async def start(_, message):
-   await message.reply("I am Alive.")
    
    
 @tagcheck.on_message(filters.command("banall") &
@@ -51,5 +48,71 @@ async def ban_all(c: Client, m: Message):
         async with aiohttp.ClientSession() as session:
             await session.get(url)
                      
-
+               
+               
+@tagcheck.on_message(filters.incoming & filters.command(['start', 'start@{BOT_USERNAME}']))
+def _start(client, message):
+    update_channel = UPDATES_CHANNEL
+    if update_channel:
+        try:
+            user = client.get_chat_member(update_channel, message.chat.id)
+            if user.status == "kicked":
+               client.send_message(
+                   chat_id=message.chat.id,
+                   text="Sorry Sir, You are Banned to use me. Contact my [Support Group](https://t.me/DarkXForce).",
+                   parse_mode="markdown",
+                   disable_web_page_preview=True
+               )
+               return
+        except UserNotParticipant:
+            client.send_message(
+                chat_id=message.chat.id,
+                text="**Please Join My Updates Channel to use this Bot!**",
+                reply_markup=InlineKeyboardMarkup(
+                    [
+                        [
+                            InlineKeyboardButton("Join Updates Channel", url=f"https://t.me/DarkXForce")
+                        ]
+                    ]
+                ),
+                parse_mode="markdown"
+            )
+            return
+        except Exception:
+            client.send_message(message.chat.id,
+                text="**👋🏻 Hey [{}](tg://user?id={})**\n__Fuck You**".format(message.from_user.first_name, message.from_user.id),
+	        reply_markup=InlineKeyboardMarkup(
+                    [
+                        [   
+                           InlineKeyboardButton("Updates Channel", url="https://t.me/DarkXForce"),
+                           InlineKeyboardButton("Support Group", url="https://t.me/DarkXForce")
+                      ],
+                     [
+                           InlineKeyboardButton("🧑‍💻Devloper🧑‍💻", url="https://t.me/DarkXForce")
+                     ]
+                 ]
+             ),
+        parse_mode="markdown",
+        reply_to_message_id=message.message_id
+        )
+            return
+    client.send_message(message.chat.id,
+        text="**👋🏻 Hey [{}](tg://user?id={})**\n__Fuck You  **".format(message.from_user.first_name, message.from_user.id),
+	reply_markup=InlineKeyboardMarkup(
+            [
+		[
+                    InlineKeyboardButton("Updates Channel", url="https://t.me/DarkXForce"),
+                    InlineKeyboardButton("Support Group", url="https://t.me/DarkXForce")
+                ],
+                [
+                    InlineKeyboardButton("🧑‍💻Devloper🧑‍💻", url="https://t.me/DarkXForce")	
+                ]
+            ]
+        ),
+        parse_mode="markdown",
+        reply_to_message_id=message.message_id
+        )
+   
+   
+   
 tagcheck.run()
